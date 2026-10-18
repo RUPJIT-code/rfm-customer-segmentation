@@ -262,5 +262,5 @@ def stop_streamlit():
 
 # To Run Use:
 
-# cd .\Customer-Segmentation\backend  
+# cd .\backend  
 # py -m uvicorn main:app --reload --port 8000
