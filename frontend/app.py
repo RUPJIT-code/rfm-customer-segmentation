@@ -166,7 +166,7 @@ def render_result(result: dict[str, Any], payload: dict[str, float]) -> None:
             "Avg_Discount_Rate": "Average discount (decimal)",
             "Unique_Product_Categories": "Unique product categories",
         })
-        st.dataframe(display, use_container_width=True, hide_index=True)
+        st.dataframe(display, width="stretch", hide_index=True)
     st.caption("The segment label and recommendation are taken from the API response; the frontend does not independently assign a segment.")
 
 

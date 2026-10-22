@@ -232,8 +232,10 @@ def launch_streamlit():
     global streamlit_process
 
     if _port_in_use(STREAMLIT_PORT):
-        # Already running (e.g. from a previous --reload cycle or manual start).
-        webbrowser.open_new_tab(f"http://127.0.0.1:{STREAMLIT_PORT}")
+        print(
+            f"[info] Streamlit already running "
+            f"on port {STREAMLIT_PORT}"
+        )
         return
 
     if not os.path.exists(FRONTEND_APP_PATH):
@@ -242,9 +244,19 @@ def launch_streamlit():
 
     streamlit_process = subprocess.Popen(
         [
-            sys.executable, "-m", "streamlit", "run", FRONTEND_APP_PATH,
-            "--server.port", str(STREAMLIT_PORT),
-            "--server.headless", "false",
+            sys.executable,
+            "-m",
+            "streamlit",
+            "run",
+            FRONTEND_APP_PATH,
+            "--server.address",
+            "0.0.0.0",
+            "--server.port",
+            str(STREAMLIT_PORT),
+            "--server.headless",
+            "true",
+            "--browser.gatherUsageStats",
+            "false",
         ]
     )
     print(f"[info] Streamlit frontend starting at http://127.0.0.1:{STREAMLIT_PORT}")
